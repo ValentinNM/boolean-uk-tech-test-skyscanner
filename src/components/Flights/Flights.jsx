@@ -15,34 +15,30 @@ const Flights = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-
-        const {itineraries, legs} = data; 
+        const { itineraries, legs } = data;
 
         // Step 1: map through the array we want to change
-        const foundFlights = data.itineraries.map((itinerary) => { 
-
+        const foundFlights = data.itineraries.map((itinerary) => {
           // Step 2: map through each array value in order to
           //        find our martching value in the target
-          const legsWithData = itinerary.legs.map((targetLegId) => 
-            legs.find((leg) => targetLegId === leg.id) // find and return the found data
-          )
+          const legsWithData = itinerary.legs.map(
+            (targetLegId) => legs.find((leg) => targetLegId === leg.id) // find and return the found data
+          );
 
           // Step 3: return the updated array
           return {
             ...itinerary, // return a copy of the initial object
-            legs: legsWithData // with updated propery we want to replace
-          }
+            legs: legsWithData, // with updated propery we want to replace
+          };
 
-          setFlights(foundFlights) // set state with updated array
-
-        })
+          setFlights(foundFlights); // set state with the updated array
+        });
       });
-    };
-    useEffect(() => {
-      getFlights();
-    }, []);
-    
-    console.log(flights)
+  };
+  useEffect(() => {
+    getFlights();
+  }, []);
+
   return (
     <div>
       <ul>
