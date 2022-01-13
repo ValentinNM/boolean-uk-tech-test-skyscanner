@@ -26,13 +26,23 @@ const Flights = () => {
           const legsWithData = itinerary.legs.map((targetLegId) => 
             legs.find((leg) => targetLegId === leg.id) // find and return the found data
           )
+
+          // Step 3: return the updated array
+          return {
+            ...itinerary, // return a copy of the initial object
+            legs: legsWithData // with updated propery we want to replace
+          }
+
+          setFlights(foundFlights) // set state with updated array
+
         })
       });
-  };
-  useEffect(() => {
-    getFlights();
-  }, []);
-
+    };
+    useEffect(() => {
+      getFlights();
+    }, []);
+    
+    console.log(flights)
   return (
     <div>
       <ul>
